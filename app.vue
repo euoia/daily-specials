@@ -138,7 +138,9 @@ export default {
       if (this.pageHeight > this.maxPageHeight) {
         const scale = this.maxPageHeight / this.pageHeight;
 
-        console.log(`Applying transformation to page: scale(${scale})`);
+        console.log(
+          `Applying transformation to page: scale(${scale}), max height: ${this.maxPageHeight}px`
+        );
         this.$refs.page.style.transform = `scale(${scale})`;
       } else {
         console.log(`Removing transformation from page`);
@@ -149,7 +151,7 @@ export default {
   mounted() {
     this.pageContainerResizeObserver = new ResizeObserver((entries) => {
       const entry = entries[0];
-      const { height } = entry.contentRect;
+      const { height, width } = entry.contentRect;
 
       console.log(`Max page height: ${height}px`);
       this.maxPageHeight = height;
@@ -158,16 +160,8 @@ export default {
 
     this.pageContainerResizeObserver.observe(this.$refs.pageContainer);
 
-    this.pageResizeObserver = new ResizeObserver((entries) => {
-      const entry = entries[0];
-      const { height } = entry.contentRect;
-
-      console.log(`Page height: ${height}px`);
-      this.scalePage();
-    });
-
     this.pageHeight = this.$refs.page.clientHeight;
-    this.pageResizeObserver.observe(this.$refs.page);
+    this.pageWidth = this.$refs.page.clientWidth;
   },
 };
 </script>
