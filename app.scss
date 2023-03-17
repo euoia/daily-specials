@@ -36,20 +36,16 @@ body {
 }
 
 .daily-special {
-  @media print {
-    transform: none;
-  }
-
   // Breakpoint 1: 980px.
   // Page and controls are too wide to fit on the screen.
-  @media (max-width: 980px) {
+  @media only screen and (max-width: 980px) {
     transform: scale(0.8);
     transform-origin: top center;
   }
 
   // Breakpoint 2: 790px.
   // We cannot shrink things any further, controls need to display separately.
-  @media (max-width: 790px) {
+  @media only screen and (max-width: 790px) {
     transform: none;
 
     flex-direction: column;
@@ -75,7 +71,7 @@ body {
 }
 
 body {
-  @media (max-width: 790px) {
+  @media only screen and (max-width: 790px) {
     margin-top: 0;
   }
 }

@@ -179,81 +179,83 @@ export default {
   justify-content: center;
   align-items: center;
 
-  .page {
-    position: relative;
-    color: black;
-    background-image: url("/img/background.png");
-    background-size: cover;
-
-    width: 148.5mm;
-    height: 793px;
-    border: 1px solid #000;
-
-    // These are the margins of the printable area inside the page.
-    // They haven't been tested and probably vary according to the printer.
-    // There is a coupling here to the background image.
-    padding-left: 8mm;
-    padding-right: 8mm;
-    padding-top: 10mm;
-    padding-bottom: 10mm;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    @media print {
-      border: none;
-      position: absolute;
-      top: 0;
-      left: 0;
-
-      // A5.
-      width: 148.5mm;
-      height: 210mm;
-    }
-
-    .content-area {
-      width: 132mm;
-      height: 190mm;
+  .page-container {
+    .page {
       position: relative;
+      color: black;
+      background-image: url("/img/background.png");
+      background-size: cover;
+
+      width: 148.5mm;
+      height: 793px;
+      border: 1px solid #000;
+
+      // These are the margins of the printable area inside the page.
+      // They haven't been tested and probably vary according to the printer.
+      // There is a coupling here to the background image.
+      padding-left: 8mm;
+      padding-right: 8mm;
+      padding-top: 10mm;
+      padding-bottom: 10mm;
 
       display: flex;
       align-items: center;
-      flex-direction: column;
-      text-align: center;
-      gap: var(--gap);
+      justify-content: center;
 
-      padding-left: var(--padding-x);
-      padding-right: var(--padding-x);
-      padding-top: var(--padding-y);
-      padding-bottom: var(--padding-y);
-
-      .title {
-        font-family: "Brush Script";
-        font-size: var(--title-size);
-        line-height: var(--title-line-height);
-      }
-
-      .subtitle {
-        font-family: "Bodoni 72";
-        font-size: var(--subtitle-size);
-        line-height: var(--subtitle-line-height);
-      }
-
-      .text {
-        font-family: "Bodoni 72 Book Italic";
-        font-style: italic;
-
-        font-size: var(--text-size);
-        line-height: var(--text-line-height);
-      }
-
-      .price {
+      @media print {
+        border: none;
         position: absolute;
-        bottom: 1cm;
-        font-family: "Bodoni 72";
-        font-size: var(--price-size);
-        line-height: var(--price-line-height);
+        top: 0;
+        left: 0;
+
+        // A5.
+        width: 148.5mm;
+        height: 210mm;
+      }
+
+      .content-area {
+        width: 132mm;
+        height: 190mm;
+        position: relative;
+
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        gap: var(--gap);
+
+        padding-left: var(--padding-x);
+        padding-right: var(--padding-x);
+        padding-top: var(--padding-y);
+        padding-bottom: var(--padding-y);
+
+        .title {
+          font-family: "Brush Script";
+          font-size: var(--title-size);
+          line-height: var(--title-line-height);
+        }
+
+        .subtitle {
+          font-family: "Bodoni 72";
+          font-size: var(--subtitle-size);
+          line-height: var(--subtitle-line-height);
+        }
+
+        .text {
+          font-family: "Bodoni 72 Book Italic";
+          font-style: italic;
+
+          font-size: var(--text-size);
+          line-height: var(--text-line-height);
+        }
+
+        .price {
+          position: absolute;
+          bottom: 1cm;
+          font-family: "Bodoni 72";
+          font-size: var(--price-size);
+          line-height: var(--price-line-height);
+        }
       }
     }
   }
