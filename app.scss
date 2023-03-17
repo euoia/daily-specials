@@ -1,0 +1,81 @@
+body {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1cm;
+
+  --green: #f2fffa;
+  --blue: #d3f4f7;
+  --red: #ffe2e1;
+  --grey: #f5f5f5;
+}
+
+@font-face {
+  font-family: "Brush Script";
+  src: url("/fonts/brush-script.ttf");
+}
+
+@font-face {
+  font-family: "Bodoni 72";
+  src: url("/fonts/BodoniSvtyTwoITCTT-Book-01.ttf");
+}
+
+@font-face {
+  font-family: "Bodoni 72 Book Italic";
+  src: url("/fonts/BodoniSvtyTwoITCTT-BookIta-02.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Maven Pro";
+  src: url("/fonts/MavenPro-Regular.ttf");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.daily-special {
+  @media print {
+    transform: none;
+  }
+
+  // Breakpoint 1: 980px.
+  // Page and controls are too wide to fit on the screen.
+  @media (max-width: 980px) {
+    transform: scale(0.8);
+    transform-origin: top center;
+  }
+
+  // Breakpoint 2: 790px.
+  // We cannot shrink things any further, controls need to display separately.
+  @media (max-width: 790px) {
+    transform: none;
+
+    flex-direction: column;
+    position: relative;
+
+    .page-container {
+      max-height: 70vh;
+    }
+
+    .page {
+      transform-origin: top center;
+    }
+
+    .controls {
+      background-color: var(--grey);
+      overflow: scroll;
+      height: 30vh;
+      border-top: 2px solid black;
+      width: 100vw;
+      padding: 5px;
+    }
+  }
+}
+
+body {
+  @media (max-width: 790px) {
+    margin-top: 0;
+  }
+}
