@@ -73,5 +73,6 @@ body {
 body {
   @media only screen and (max-width: 790px) {
     margin-top: 0;
+    overflow-x: hidden;
   }
 }
