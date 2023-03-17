@@ -147,6 +147,10 @@ export default {
         this.$refs.page.style.transform = null;
       }
     },
+    removeScaling() {
+      console.log(`Removing scaling from page.`);
+      this.$refs.page.style.transform = null;
+    },
   },
   mounted() {
     this.pageContainerResizeObserver = new ResizeObserver((entries) => {
@@ -154,6 +158,8 @@ export default {
       const { height, width } = entry.contentRect;
 
       console.log(`Max page height: ${height}px`);
+
+      // For some reason, mobile Safari scales to 0.
       this.maxPageHeight = height;
       this.scalePage();
     });
@@ -162,6 +168,26 @@ export default {
 
     this.pageHeight = this.$refs.page.clientHeight;
     this.pageWidth = this.$refs.page.clientWidth;
+
+    const beforePrint = () => {
+      console.log("Functionality to run before printing.");
+      this.removeScaling();
+    };
+
+    const afterPrint = () => {
+      this.scalePage();
+    };
+
+    if (window.matchMedia) {
+      var mediaQueryList = window.matchMedia("print");
+      mediaQueryList.addListener(function (mql) {
+        if (mql.matches) {
+          beforePrint();
+        } else {
+          afterPrint();
+        }
+      });
+    }
   },
 };
 </script>

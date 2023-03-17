@@ -82,5 +82,9 @@ body {
   @media print {
     width: 148.5mm;
     height: 210mm;
+
+    .page {
+      transform: none;
+    }
   }
 }
