@@ -78,8 +78,9 @@ body {
   }
 
   // Fix for Safari.
+  // A5.
   @media print {
     width: 148.5mm;
-    height: 793px;
+    height: 210mm;
   }
 }

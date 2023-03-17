@@ -180,8 +180,9 @@ export default {
       background-image: url("/img/background.png");
       background-size: cover;
 
+      // A5.
       width: 148.5mm;
-      height: 793px;
+      height: 210mm;
       border: 1px solid #000;
 
       // These are the margins of the printable area inside the page.
