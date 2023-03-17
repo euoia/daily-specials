@@ -76,4 +76,10 @@ body {
     overflow-x: hidden;
     position: relative;
   }
+
+  // Fix for Safari.
+  @media print {
+    width: 148.5mm;
+    height: 793px;
+  }
 }
