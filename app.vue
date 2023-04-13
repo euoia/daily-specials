@@ -27,70 +27,32 @@
         </ul>
       </ds-box>
 
-      <ds-css-control
-        v-model="gap"
-        label="Gap"
-        type="range"
-        min="0"
-        max="8"
-        step="0.1"
-      />
+      <ds-css-control v-model="gap" label="Gap" type="range" min="0" max="8" step="0.1" />
 
       <ds-box color="green">
-        <ds-css-control
-          v-model="paddingX"
-          label="Padding horizontal"
-          type="range"
-          min="0"
-          max="4"
-          step="0.1"
-          is-grouped
-        />
-        <ds-css-control
-          v-model="paddingY"
-          label="Padding vertical"
-          type="range"
-          min="0"
-          max="10"
-          step="0.1"
-          is-grouped
-        />
+        <ds-css-control v-model="paddingX" label="Padding horizontal" type="range" min="0" max="4" step="0.1"
+          is-grouped />
+        <ds-css-control v-model="paddingY" label="Padding vertical" type="range" min="0" max="10" step="0.1" is-grouped />
       </ds-box>
 
-      <text-control
-        v-model:text="title"
-        v-model:size="titleSize"
-        v-model:line-height="titleLineHeight"
-        label="Title"
-      />
+      <text-control v-model:text="title" v-model:size="titleSize" v-model:line-height="titleLineHeight" label="Title" />
 
-      <text-control
-        v-model:text="subtitle"
-        v-model:size="subtitleSize"
-        v-model:line-height="subtitleLineHeight"
-        label="Subtitle"
-      />
+      <text-control v-model:text="subtitle" v-model:size="subtitleSize" v-model:line-height="subtitleLineHeight"
+        label="Subtitle" />
 
-      <text-control
-        v-model:text="text"
-        v-model:size="textSize"
-        v-model:line-height="textLineHeight"
-        label="Text"
-        is-text-area
-      />
+      <text-control v-model:text="text" v-model:size="textSize" v-model:line-height="textLineHeight" label="Text"
+        is-text-area />
 
-      <text-control
-        v-model:text="price"
-        v-model:size="priceSize"
-        v-model:line-height="priceLineHeight"
-        label="Price"
-      />
+      <text-control v-model:text="price" v-model:size="priceSize" v-model:line-height="priceLineHeight" label="Price" />
+
+      <button @click="download">Download</button>
     </div>
   </div>
 </template>
 
 <script>
 import "@fontsource/bodoni-moda";
+import html2canvas from "html2canvas";
 
 export default {
   data() {
@@ -151,6 +113,23 @@ export default {
       console.log(`Removing scaling from page.`);
       this.$refs.page.style.transform = null;
     },
+    download() {
+      html2canvas(this.$refs.page).then(function (canvas) {
+        const a = document.createElement('a');
+        // toDataURL defaults to png, so we need to request a jpeg, then convert for file download.
+        a.href = canvas.toDataURL();
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        const seconds = date.getSeconds();
+        const filename = `daily-specials-${year}-${month}-${day}_${hours}-${minutes}-${seconds}.png`;
+        a.download = filename;
+        a.click();
+      });
+    }
   },
   mounted() {
     this.pageContainerResizeObserver = new ResizeObserver((entries) => {
@@ -287,6 +266,7 @@ export default {
     flex-direction: column;
     gap: 1em;
     min-width: 400px; // TODO: Responsive.
+    margin-bottom: 2em;
 
     .slider {
       width: 100%;

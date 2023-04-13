@@ -88,3 +88,11 @@ body {
     }
   }
 }
+
+// Do not print URL in footer
+// https://stackoverflow.com/questions/585254/how-to-remove-the-url-from-the-printing-page
+@media print {
+    a[href]:after {
+        content: none !important;
+    }
+}
