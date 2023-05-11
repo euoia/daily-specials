@@ -114,8 +114,9 @@ export default {
       this.$refs.page.style.transform = null;
     },
     download() {
+      document.querySelector(".page").classList.add("border-hidden");
       html2canvas(this.$refs.page).then(function (canvas) {
-        const a = document.createElement('a');
+        const a = document.createElement("a");
         // toDataURL defaults to png, so we need to request a jpeg, then convert for file download.
         a.href = canvas.toDataURL();
         const date = new Date();
@@ -127,9 +128,11 @@ export default {
         const seconds = date.getSeconds();
         const filename = `daily-specials-${year}-${month}-${day}_${hours}-${minutes}-${seconds}.png`;
         a.download = filename;
+
         a.click();
+        document.querySelector(".page").classList.remove("border-hidden");
       });
-    }
+    },
   },
   mounted() {
     this.pageContainerResizeObserver = new ResizeObserver((entries) => {
@@ -189,6 +192,10 @@ export default {
       width: 148.5mm;
       height: 210mm;
       border: 1px solid #000;
+
+      &.border-hidden {
+        border: none;
+      }
 
       // These are the margins of the printable area inside the page.
       // They haven't been tested and probably vary according to the printer.
